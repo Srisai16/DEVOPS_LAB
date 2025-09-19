@@ -1,0 +1,110 @@
+<body>
+  <div class="w-full max-w-2xl">
+    <!-- Header with College Info -->
+    <div class="bg-gradient-to-r p-6 text-white">
+      <h1>ACE ENGINEERING COLLEGE</h1>
+      <p>Event Registration Portal</p>
+    </div>
+
+    <!-- Main Form -->
+    <div class="p-6">
+      <form id="registrationForm" class="space-y-5">
+        <!-- Name Field -->
+        <div>
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required placeholder="Enter your full name">
+        </div>
+
+        <!-- Department Radio Buttons -->
+        <div>
+          <label>Department</label>
+          <div class="grid grid-cols-2 gap-3">
+            <label><input type="radio" name="department" value="CSE" required>CSE</label>
+            <label><input type="radio" name="department" value="IT">IT</label>
+            <!-- ... other departments ... -->
+          </div>
+        </div>
+
+        <!-- Password Field with Toggle -->
+        <div>
+          <label for="password">Password</label>
+          <div class="relative">
+            <input type="password" id="password" name="password" required>
+            <div onclick="togglePassword('password')">
+              <i class="fas fa-eye"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <button type="submit">Register for Event</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="hidden">
+      <h3>Registration Successful!</h3>
+      <button onclick="closeModal()">Continue</button>
+    </div>
+  </div>
+</body>
+
+
+
+
+<script>
+  const registrationForm = document.getElementById('registrationForm');
+  const passwordInput = document.getElementById('password');
+  const confirmPasswordInput = document.getElementById('confirmPassword');
+  const successModal = document.getElementById('successModal');
+
+  function togglePassword(inputId) {
+    const input = document.getElementById(inputId);
+    const icon = input.nextElementSibling.querySelector('i');
+    input.type = (input.type === 'password') ? 'text' : 'password';
+    // Logic to change icon
+  }
+
+  function closeModal() {
+    successModal.classList.add('hidden');
+  }
+
+  registrationForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    if (passwordInput.value !== confirmPasswordInput.value) {
+      // Show password mismatch error
+      return;
+    }
+    // Perform password strength check
+    // If all checks pass:
+    successModal.classList.remove('hidden');
+    registrationForm.reset();
+  });
+</script>
+
+
+
+
+
+<style>
+  .input-focus:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+    border-color: #6366f1;
+  }
+
+  .password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .department-option:hover div {
+    border-color: #a5b4fc;
+    background-color: #f5f3ff;
+  }
+</style>
